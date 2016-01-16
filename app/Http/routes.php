@@ -24,7 +24,7 @@ Route::get('/admin', ['middleware' => 'auth', function () {
     return view('dashboard.index',$data);
 }]); 
 
-Route::post('login', 'LogController@store');
-Route::get('logout', 'LogController@logout');
+Route::post('/login', 'LogController@store');
+Route::get('/logout', 'LogController@logout');
 
-Route::resource('inv_catarticu', 'inv_catarticuController');
+Route::resource('/inv_catarticu', 'inv_catarticuController');
