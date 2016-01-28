@@ -4,15 +4,77 @@
     <div class="row">
         <div class="col-sm-8 main-content">
              <h2>inv_catarticu</h2>
-             <a href="{{ route('inv_catarticu.create') }}">
-                 <button class="btn btn-primary pull-right" style="margin:1em 0em;">Registrar</button>
-            </a>
+             
+
+              {!! Form::open(['route' => 'inv_catarticu.index', 'method'=>'GET', 'class' => 'form-horizontal']) !!}
+
+                  <div class="form-group {{ $errors->has('cat_codigo') ? 'has-error' : ''}}">
+                {!! Form::label('cat_codigo', 'Cat Codigo: ', ['class' => 'col-sm-3 control-label']) !!}
+                <div class="col-sm-6">
+                    {!! Form::text('cat_codigo', null, ['class' => 'form-control', 'placeholder'=>'Codigo'])!!}
+                  </div>
+                </div>
+
+<div class="form-group {{ $errors->has('cat_codigo') ? 'has-error' : ''}}">
+                {!! Form::label('cat', 'Cat Codigo: ', ['class' => 'col-sm-3 control-label']) !!}
+                <div class="col-sm-6">
+
+                    {!! Form::text('cat_nombre', null, ['class' => 'form-control', 'placeholder'=>'Nombre'])!!}
+                  </div>
+                </div>
+
+                  <button type="submit" class="btn btn-primary pull-right" style="margin:1em 0em;">Buscar</button>
+                    
+              {!! Form::close() !!}
+
+                  <a href="{{ route('inv_catarticu.create') }}">
+                    <button class="btn btn-primary pull-right" style="margin:1em 0em;">Registrar</button>
+                  </a>
+
+
+           
             <table class="table table-first-column-check table-hover">
                 <thead>
                     <tr>
                       <th class="col-md-1">S.No</th>
-                      <th class="col-md-2">Codigo</th>
-                      <th class="col-md-8">Nombre</th>
+                      <th class="col-md-2">
+                        
+                       @if ($sortby == 'cat_codigo' && $order == 'asc') {!! link_to_action(
+                               'inv_catarticuController@index',
+                               'Codigo',
+                               array(
+                                   'sortby' => 'cat_codigo',
+                                   'order' => 'desc'
+                               )
+                           ) !!}
+                       @else {!! link_to_action(
+                               'inv_catarticuController@index',
+                               'Codigo',
+                               array(
+                                   'sortby' => 'cat_codigo',
+                                   'order' => 'asc'
+                               )
+                           )!!}
+                       @endif
+                      </th>
+                      <th class="col-md-8">
+                      @if ($sortby == 'cat_nombre' && $order == 'asc') {!! link_to_action(
+                               'inv_catarticuController@index',
+                               'Nombre ',
+                               array(
+                                   'sortby' => 'cat_nombre',
+                                   'order' => 'desc'
+                               )
+                           ) !!}
+                       @else {!! link_to_action(
+                               'inv_catarticuController@index',
+                               'Nombre',
+                               array(
+                                   'sortby' => 'cat_nombre',
+                                   'order' => 'asc'
+                               )
+                           )!!}
+                       @endif</th>
                       <th class="col-md-3">Acciones</th>
                     </tr>
                 </thead>
@@ -44,6 +106,9 @@
                   
                 </tbody>
             </table>
+            <div align="center">
+            {!!$inv_catarticus->appends(['sortby' => $sortby, 'order' => $order ])->render()!!}
+        </div>
         </div>
     </div>
 </div>

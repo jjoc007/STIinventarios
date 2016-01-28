@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Gbrock\Table\Traits\Sortable;
 
 class inv_catarticu extends Model
 {
@@ -12,6 +13,10 @@ class inv_catarticu extends Model
      *
      * @var string
      */
+
+    use Sortable;
+
+    protected $sortable = ['cat_codigo', 'cat_nombre'];
     protected $table = 'inv_catarticus';
 
     /**

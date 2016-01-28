@@ -7,7 +7,9 @@
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
-        "appzcoder/crud-generator": "^1.0"
+        "laravelcollective/html": "~5.0",
+        "appzcoder/crud-generator": "^1.0",
+		"gbrock/laravel-table": "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -15,7 +17,7 @@
         "phpunit/phpunit": "~4.0",
         "phpspec/phpspec": "~2.1"
     },
-    "autoload": {
+    "autoload": {   
         "classmap": [
             "database"
         ],

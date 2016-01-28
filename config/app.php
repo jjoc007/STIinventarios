@@ -148,6 +148,8 @@ return [
         Appzcoder\CrudGenerator\CrudGeneratorServiceProvider::class,
         // Use the line bellow for "laravelcollective/html" package otherwise remove it.
         Collective\Html\HtmlServiceProvider::class,
+        Gbrock\Table\Providers\TableServiceProvider::class,
+
 
     ],
 
@@ -200,6 +202,8 @@ return [
 
         'Form'      => Collective\Html\FormFacade::class,
         'HTML'      => Collective\Html\HtmlFacade::class,
+
+        'Table'      => Gbrock\Table\Facades\Table::class,
 
     ],
 
