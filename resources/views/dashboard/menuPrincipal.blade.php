@@ -60,6 +60,7 @@
             
             <li class=" "><a rel="tooltip" data-placement="right" data-original-title="Reports" href="inv_catarticu"><i class="icon-bar-chart"></i> <span class="caption">inv_catarticu</span></a></li>
             
+            <li class=" "><a rel="tooltip" data-placement="right" data-original-title="Reports" href="inv_almacenes"><i class="icon-bar-chart"></i> <span class="caption">inv_almacenes</span></a></li>
             
             <li class=" "><a rel="tooltip" data-placement="right" data-original-title="UI Features" href="#"><i class="icon-archive"></i> <span class="caption">Paquetes</span></a></li>
             

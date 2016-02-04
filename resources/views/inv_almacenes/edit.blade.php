@@ -1,6 +1,7 @@
-@extends('layouts.master')
+ <div class="content">
+    <div class="row">
+        <div class="col-sm-8 main-content">   
 
-@section('content')
 
     <h1>Edit Inv_almacene</h1>
     <hr/>
@@ -28,9 +29,7 @@
 
 
     <div class="form-group">
-        <div class="col-sm-offset-3 col-sm-3">
-            {!! Form::submit('Update', ['class' => 'btn btn-primary form-control']) !!}
-        </div>
+        <button type="submit" class="btn btn-primary pull-right" style="margin:1em 0em;">Actualizar</button>
     </div>
     {!! Form::close() !!}
 
@@ -42,4 +41,7 @@
         </ul>
     @endif
 
-@endsection
+        </div>
+    </div>
+</div>
+

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Input;
 
 use App\inv_controlart;
 use Illuminate\Http\Request;
@@ -20,9 +21,36 @@ class inv_controlartController extends Controller
      */
     public function index()
     {
-        $inv_controlart = inv_controlart::paginate(15);
+       
+        $sortby  = Input::get('sortby');
+        $order   = Input::get('order');
+        $articulo  = Input::get('ctl_articulo');
+        $cantidad  = Input::get('ctl_cantstock');
+    
+        $inv_controlart = new inv_catarticu();
 
-        return view('inv_controlart.index', compact('inv_controlart'));
+        if($articulo){
+            $inv_controlart = $inv_controlart->where('ctl_articulo', $articulo);
+        }
+
+         if($cantidad){
+            $inv_controlart = $inv_controlart->where('ctl_cantstock', $cantidad);
+        }
+
+       
+
+        if ($sortby && $order) {
+            $inv_controlart = $inv_controlart->orderBy($sortby, $order)->paginate(env('PAGINATE_CRUD'));
+        } else {
+           $inv_controlart = $inv_controlart->paginate(env('PAGINATE_CRUD'));
+        }
+
+        $urlActual= 'inv_controlart.index';
+        return view('dashboard.index',compact('inv_controlart','urlActual','sortby','order'));
+
+
+
+
     }
 
     /**
@@ -32,7 +60,9 @@ class inv_controlartController extends Controller
      */
     public function create()
     {
-        return view('inv_controlart.create');
+        
+         $data['urlActual']= 'inv_controlart.create';
+        return view('dashboard.index',$data);
     }
 
     /**
@@ -74,8 +104,8 @@ class inv_controlartController extends Controller
     public function edit($id)
     {
         $inv_controlart = inv_controlart::findOrFail($id);
-
-        return view('inv_controlart.edit', compact('inv_controlart'));
+         $data['urlActual']= 'inv_controlart.edit';
+        return view('dashboard.index',$data,compact('inv_controlart'));
     }
 
     /**

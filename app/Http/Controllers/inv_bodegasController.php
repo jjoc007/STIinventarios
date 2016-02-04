@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Input;
 
 use App\inv_bodega;
 use Illuminate\Http\Request;
@@ -20,9 +21,34 @@ class inv_bodegasController extends Controller
      */
     public function index()
     {
-        $inv_bodegas = inv_bodega::paginate(15);
+       
+        $sortby  = Input::get('sortby');
+        $order   = Input::get('order');
+        $codigo  = Input::get('bod_codigo');
+        $nombre  = Input::get('bod_nombre');
 
-        return view('inv_bodegas.index', compact('inv_bodegas'));
+    
+        $inv_bodegas = new inv_bodega();
+
+        if($codigo){
+            $inv_bodegas = $inv_bodegas->where('bod_codigo', $codigo);
+        }
+
+        if($nombre){
+            $inv_bodegas = $inv_bodegas->where('bod_nombre','like', '%'.$nombre.'%');
+        }
+
+        if ($sortby && $order) {
+            $inv_bodegas = $inv_bodegas->orderBy($sortby, $order)->paginate(env('PAGINATE_CRUD'));
+        } else {
+           $inv_bodegas = $inv_bodegas->paginate(env('PAGINATE_CRUD'));
+        }
+
+        $urlActual= 'inv_bodegas.index';
+        return view('dashboard.index',compact('inv_bodegas','urlActual','sortby','order'));
+
+
+
     }
 
     /**
@@ -32,7 +58,9 @@ class inv_bodegasController extends Controller
      */
     public function create()
     {
-        return view('inv_bodegas.create');
+
+         $data['urlActual']= 'inv_bodegas.create';
+        return view('dashboard.index',$data);
     }
 
     /**
@@ -73,9 +101,10 @@ class inv_bodegasController extends Controller
      */
     public function edit($id)
     {
-        $inv_bodega = inv_bodega::findOrFail($id);
 
-        return view('inv_bodegas.edit', compact('inv_bodega'));
+         $inv_catarticu = inv_catarticu::findOrFail($id);
+        $data['urlActual']= 'inv_bodegas.edit';
+        return view('dashboard.index',$data,compact('inv_bodega'));
     }
 
     /**

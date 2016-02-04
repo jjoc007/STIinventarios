@@ -38,9 +38,9 @@ class inv_catarticuController extends Controller
         }
 
         if ($sortby && $order) {
-            $inv_catarticus = $inv_catarticus->orderBy($sortby, $order)->paginate(2);
+            $inv_catarticus = $inv_catarticus->orderBy($sortby, $order)->paginate(env('PAGINATE_CRUD'));
         } else {
-           $inv_catarticus = $inv_catarticus->paginate(2);
+           $inv_catarticus = $inv_catarticus->paginate(env('PAGINATE_CRUD'));
         }
 
         $urlActual= 'inv_catarticu.index';

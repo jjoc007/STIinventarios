@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Input;
 
 use App\inv_almacene;
 use Illuminate\Http\Request;
@@ -20,9 +21,33 @@ class inv_almacenesController extends Controller
      */
     public function index()
     {
-        $inv_almacenes = inv_almacene::paginate(15);
 
-        return view('inv_almacenes.index', compact('inv_almacenes'));
+        $sortby  = Input::get('sortby');
+        $order   = Input::get('order');
+        $codigo  = Input::get('alm_codigo');
+        $nombre  = Input::get('alm_nombre');
+    
+        $inv_almacenes = new inv_almacene();
+
+        if($codigo){
+            $inv_almacenes = $inv_almacenes->where('alm_codigo', $codigo);
+        }
+
+        if($nombre){
+            $inv_almacenes = $inv_almacenes->where('alm_nombre','like', '%'.$nombre.'%');
+        }
+
+        if ($sortby && $order) {
+            $inv_almacenes = $inv_almacenes->orderBy($sortby, $order)->paginate(env('PAGINATE_CRUD'));
+        } else {
+           $inv_almacenes = $inv_almacenes->paginate(env('PAGINATE_CRUD'));
+        }
+
+        $urlActual= 'inv_almacenes.index';
+        return view('dashboard.index',compact('inv_almacenes','urlActual','sortby','order'));
+
+
+
     }
 
     /**
@@ -32,7 +57,9 @@ class inv_almacenesController extends Controller
      */
     public function create()
     {
-        return view('inv_almacenes.create');
+         $data['urlActual']= 'inv_almacenes.create';
+        return view('dashboard.index',$data);
+
     }
 
     /**
@@ -74,8 +101,8 @@ class inv_almacenesController extends Controller
     public function edit($id)
     {
         $inv_almacene = inv_almacene::findOrFail($id);
-
-        return view('inv_almacenes.edit', compact('inv_almacene'));
+        $data['urlActual']= 'inv_almacenes.edit';
+        return view('dashboard.index',$data,compact('inv_catarticu'));
     }
 
     /**

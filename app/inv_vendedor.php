@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Gbrock\Table\Traits\Sortable;
 
 class inv_vendedor extends Model
 {
@@ -13,6 +14,7 @@ class inv_vendedor extends Model
      * @var string
      */
     protected $table = 'inv_vendedors';
+    protected $sortable =  ['ven_codigo', 'ven_nombre', 'ven_zona'];
 
     /**
      * Attributes that should be mass-assignable.
