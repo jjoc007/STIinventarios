@@ -1,10 +1,11 @@
 <?php
+
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Gbrock\Table\Traits\Sortable;
 
-class inv_catarticu extends Model
+class inv_sucursale extends Model
 {
 
     /**
@@ -12,17 +13,14 @@ class inv_catarticu extends Model
      *
      * @var string
      */
-
-    use Sortable;
-
-    protected $sortable = ['cat_codigo', 'cat_nombre'];
-    protected $table = 'inv_catarticus';
+    protected $table = 'inv_sucursales';
+	protected $sortable = ['suc_codigo', 'suc_nombre', 'suc_direccion'];
 
     /**
      * Attributes that should be mass-assignable.
      *
      * @var array
      */
-    protected $fillable = ['cat_codigo', 'cat_nombre'];
+    protected $fillable = ['suc_codigo', 'suc_nombre', 'suc_direccion'];
 
 }
