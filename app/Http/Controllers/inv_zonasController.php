@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Input;
 
 use App\inv_zona;
 use Illuminate\Http\Request;
@@ -20,9 +21,29 @@ class inv_zonasController extends Controller
      */
     public function index()
     {
-        $inv_zonas = inv_zona::paginate(15);
+		$sortby  = Input::get('sortby');
+        $order   = Input::get('order');
+        $codigo  = Input::get('zon_codigo');
+        $nombre  = Input::get('zon_nombre');
+    
+		$inv_zonas = new inv_zona();
 
-        return view('inv_zonas.index', compact('inv_zonas'));
+        if($codigo){
+            $inv_zonas = $inv_zonas->where('zon_codigo', $codigo);
+        }
+
+        if($nombre){
+            $inv_zonas = $inv_zonas->where('zon_nombre','like', '%'.$nombre.'%');
+        }
+
+        if ($sortby && $order) {
+            $inv_zonas = $inv_zonas->orderBy($sortby, $order)->paginate(env('PAGINATE_CRUD'));
+        } else {
+           $inv_zonas = $inv_zonas->paginate(env('PAGINATE_CRUD'));
+        }
+
+        $urlActual= 'inv_zonas.index';
+        return view('dashboard.index',compact('inv_zonas','urlActual','sortby','order'));
     }
 
     /**
@@ -32,7 +53,8 @@ class inv_zonasController extends Controller
      */
     public function create()
     {
-        return view('inv_zonas.create');
+		$data['urlActual']= 'inv_zonas.create';
+        return view('dashboard.index',$data);
     }
 
     /**
@@ -75,7 +97,8 @@ class inv_zonasController extends Controller
     {
         $inv_zona = inv_zona::findOrFail($id);
 
-        return view('inv_zonas.edit', compact('inv_zona'));
+		$data['urlActual']= 'inv_zonas.edit';
+        return view('dashboard.index',$data,compact('inv_zona'));
     }
 
     /**

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Support\Facades\Input;
 use App\inv_vendedor;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -20,9 +20,35 @@ class inv_vendedorController extends Controller
      */
     public function index()
     {
-        $inv_vendedor = inv_vendedor::paginate(15);
+		
+		$sortby  = Input::get('sortby');
+        $order   = Input::get('order');
+        $codigo  = Input::get('ven_codigo');
+        $nombre  = Input::get('ven_nombre');
+		$zona    = Input::get('ven_zona');
+    
+		$inv_vendedor = new inv_vendedor();
 
-        return view('inv_vendedor.index', compact('inv_vendedor'));
+        if($codigo){
+            $inv_vendedor = $inv_vendedor->where('ven_codigo', $codigo);
+        }
+
+        if($nombre){
+            $inv_vendedor = $inv_vendedor->where('ven_nombre','like', '%'.$nombre.'%');
+        }
+
+		if($zona){
+            $inv_vendedor = $inv_vendedor->where('ven_zona',$zona);
+        }
+		
+        if ($sortby && $order) {
+            $inv_vendedor = $inv_vendedor->orderBy($sortby, $order)->paginate(env('PAGINATE_CRUD'));
+        } else {
+           $inv_vendedor = $inv_vendedor->paginate(env('PAGINATE_CRUD'));
+        }
+
+        $urlActual= 'inv_vendedor.index';
+        return view('dashboard.index',compact('inv_vendedor','urlActual','sortby','order'));
     }
 
     /**
@@ -32,7 +58,8 @@ class inv_vendedorController extends Controller
      */
     public function create()
     {
-        return view('inv_vendedor.create');
+		$data['urlActual']= 'inv_vendedor.create';
+        return view('dashboard.index',$data);
     }
 
     /**
@@ -75,7 +102,8 @@ class inv_vendedorController extends Controller
     {
         $inv_vendedor = inv_vendedor::findOrFail($id);
 
-        return view('inv_vendedor.edit', compact('inv_vendedor'));
+		$data['urlActual']= 'inv_vendedor.edit';
+        return view('dashboard.index',$data,compact('inv_vendedor'));
     }
 
     /**
