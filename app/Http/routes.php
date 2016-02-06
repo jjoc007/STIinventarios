@@ -35,3 +35,6 @@ Route::resource('inv_almacenes', 'inv_almacenesController');
 Route::resource('inv_zonas', 'inv_zonasController');
 Route::resource('inv_vendedor', 'inv_vendedorController');
 Route::resource('inv_sucursales', 'inv_sucursalesController');
+Route::resource('inv_ciudades', 'inv_ciudadesController');
+Route::resource('inv_departamento', 'inv_departamentoController');
+Route::resource('inv_documentos', 'inv_documentosController');
