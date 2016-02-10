@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-sm-8 main-content">   
 
-    <h1>Edit Inv_sucursale</h1>
+    <h2>Edit Inv_sucursale</h2>
     <hr/>
 
     {!! Form::model($inv_sucursale, [

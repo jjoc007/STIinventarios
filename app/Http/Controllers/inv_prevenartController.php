@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Support\Facades\Input;
 use App\inv_prevenart;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -20,10 +20,37 @@ class inv_prevenartController extends Controller
      */
     public function index()
     {
-        $inv_prevenart = inv_prevenart::paginate(15);
+		
+		$sortby  = Input::get('sortby');
+        $order   = Input::get('order');
+		
+        $inv_prevenart = new inv_prevenart();
+		
+		$codigo  = Input::get('prv_codigo');
+		$intervenini  = Input::get('prv_intervenini');
+		$intervenfin  = Input::get('prv_intervenfin');
+		$unidad  = Input::get('prv_unidad');
+		$valor  = Input::get('prv_valor');
+		$vigencia  = Input::get('prv_vigencia');
+		$usuario  = Input::get('prv_usuario');
+		$fecaud  = Input::get('prv_fecaud');
 
-        return view('inv_prevenart.index', compact('inv_prevenart'));
-    }
+		if($codigo){
+            $inv_prevenart = $inv_prevenart->where('prv_codigo', $codigo);
+        }
+        if($usuario){
+            $inv_prevenart = $inv_prevenart->where('prv_usuario', $usuario);
+        }		
+		
+		if ($sortby && $order) {
+            $inv_prevenart = $inv_prevenart->orderBy($sortby, $order)->paginate(env('PAGINATE_CRUD'));
+        } else {
+           $inv_prevenart = $inv_prevenart->paginate(env('PAGINATE_CRUD'));
+        }
+		
+		$urlActual= 'inv_prevenart.index';
+        return view('dashboard.index', compact('inv_prevenart','urlActual','sortby','order'));
+}
 
     /**
      * Show the form for creating a new resource.
@@ -32,7 +59,8 @@ class inv_prevenartController extends Controller
      */
     public function create()
     {
-        return view('inv_prevenart.create');
+       $data['urlActual']= 'inv_prevenart.create';
+       return view('dashboard.index',$data);
     }
 
     /**
@@ -75,7 +103,8 @@ class inv_prevenartController extends Controller
     {
         $inv_prevenart = inv_prevenart::findOrFail($id);
 
-        return view('inv_prevenart.edit', compact('inv_prevenart'));
+        $data['urlActual']= 'inv_prevenart.edit';
+        return view('dashboard.index',$data,compact('inv_prevenart'));
     }
 
     /**

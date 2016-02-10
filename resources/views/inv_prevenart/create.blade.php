@@ -1,8 +1,8 @@
-@extends('layouts.master')
-
-@section('content')
-
-    <h1>Create New Inv_prevenart</h1>
+<div class="content">
+    <div class="row">
+        <div class="col-sm-8 main-content">
+		
+    <h2>Create New Inv_prevenart</h2>
     <hr/>
 
     {!! Form::open(['url' => 'inv_prevenart', 'class' => 'form-horizontal']) !!}
@@ -65,10 +65,8 @@
             </div>
 
 
-    <div class="form-group">
-        <div class="col-sm-offset-3 col-sm-3">
-            {!! Form::submit('Create', ['class' => 'btn btn-primary form-control']) !!}
-        </div>
+   <div class="form-group">
+       <button type="submit" class="btn btn-primary pull-right" style="margin:1em 0em;">Registrar</button>       
     </div>
     {!! Form::close() !!}
 
@@ -78,6 +76,7 @@
                 <li>{{ $error }}</li>
             @endforeach
         </ul>
-    @endif
-
-@endsection
+     @endif
+</div>
+</div>
+</div>

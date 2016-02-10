@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
-
 use App\inv_controlart;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -20,14 +19,14 @@ class inv_controlartController extends Controller
      * @return Response
      */
     public function index()
-    {
-       
+    {       
         $sortby  = Input::get('sortby');
         $order   = Input::get('order');
+		
         $articulo  = Input::get('ctl_articulo');
         $cantidad  = Input::get('ctl_cantstock');
     
-        $inv_controlart = new inv_catarticu();
+        $inv_controlart = new inv_controlart();
 
         if($articulo){
             $inv_controlart = $inv_controlart->where('ctl_articulo', $articulo);
@@ -36,8 +35,7 @@ class inv_controlartController extends Controller
          if($cantidad){
             $inv_controlart = $inv_controlart->where('ctl_cantstock', $cantidad);
         }
-
-       
+      
 
         if ($sortby && $order) {
             $inv_controlart = $inv_controlart->orderBy($sortby, $order)->paginate(env('PAGINATE_CRUD'));
@@ -47,10 +45,6 @@ class inv_controlartController extends Controller
 
         $urlActual= 'inv_controlart.index';
         return view('dashboard.index',compact('inv_controlart','urlActual','sortby','order'));
-
-
-
-
     }
 
     /**
@@ -104,7 +98,7 @@ class inv_controlartController extends Controller
     public function edit($id)
     {
         $inv_controlart = inv_controlart::findOrFail($id);
-         $data['urlActual']= 'inv_controlart.edit';
+        $data['urlActual']= 'inv_controlart.edit';
         return view('dashboard.index',$data,compact('inv_controlart'));
     }
 

@@ -61,6 +61,27 @@
             <li class=" "><a rel="tooltip" data-placement="right" data-original-title="Reports" href="inv_catarticu"><i class="icon-bar-chart"></i> <span class="caption">inv_catarticu</span></a></li>
             
             <li class=" "><a rel="tooltip" data-placement="right" data-original-title="Reports" href="inv_almacenes"><i class="icon-bar-chart"></i> <span class="caption">inv_almacenes</span></a></li>
+			
+			<li class=" "><a rel="tooltip" data-placement="right" data-original-title="Reports" href="inv_articulos"><i class="icon-bar-chart"></i> <span class="caption">inv_articulos</span></a></li>
+			
+			<li class=" "><a rel="tooltip" data-placement="right" data-original-title="Reports" href="inv_documentos"><i class="icon-bar-chart"></i> <span class="caption">inv_documentos</span></a></li>
+			
+			<li class=" "><a rel="tooltip" data-placement="right" data-original-title="Reports" href="inv_formpagos"><i class="icon-bar-chart"></i> <span class="caption">inv_formpagos</span></a></li>
+			<li class=" "><a rel="tooltip" data-placement="right" data-original-title="Reports" href="inv_sucursales"><i class="icon-bar-chart"></i> <span class="caption">inv_sucursales</span></a></li>
+			<li class=" "><a rel="tooltip" data-placement="right" data-original-title="Reports" href="inv_departamento"><i class="icon-bar-chart"></i> <span class="caption">inv_departamento</span></a></li>
+			<li class=" "><a rel="tooltip" data-placement="right" data-original-title="Reports" href="inv_ciudades"><i class="icon-bar-chart"></i> <span class="caption">inv_ciudades</span></a></li>
+			<li class=" "><a rel="tooltip" data-placement="right" data-original-title="Reports" href="inv_tercero"><i class="icon-bar-chart"></i> <span class="caption">inv_tercero</span></a></li>
+			<li class=" "><a rel="tooltip" data-placement="right" data-original-title="Reports" href="inv_vendedor"><i class="icon-bar-chart"></i> <span class="caption">inv_vendedor</span></a></li>
+			<li class=" "><a rel="tooltip" data-placement="right" data-original-title="Reports" href="inv_zonas"><i class="icon-bar-chart"></i> <span class="caption">inv_zonas</span></a></li>
+			<li class=" "><a rel="tooltip" data-placement="right" data-original-title="Reports" href="inv_encfactura"><i class="icon-bar-chart"></i> <span class="caption">inv_encfactura</span></a></li>
+			<li class=" "><a rel="tooltip" data-placement="right" data-original-title="Reports" href="inv_imptoart"><i class="icon-bar-chart"></i> <span class="caption">inv_imptoart</span></a></li>
+			<li class=" "><a rel="tooltip" data-placement="right" data-original-title="Reports" href="inv_unidarti"><i class="icon-bar-chart"></i> <span class="caption">inv_unidarti</span></a></li>
+			<li class=" "><a rel="tooltip" data-placement="right" data-original-title="Reports" href="inv_bodegas"><i class="icon-bar-chart"></i> <span class="caption">inv_bodegas</span></a></li>
+			<li class=" "><a rel="tooltip" data-placement="right" data-original-title="Reports" href="inv_controlart"><i class="icon-bar-chart"></i> <span class="caption">inv_controlart</span></a></li>
+			<li class=" "><a rel="tooltip" data-placement="right" data-original-title="Reports" href="inv_prevenart"><i class="icon-bar-chart"></i> <span class="caption">inv_prevenart</span></a></li>
+			<li class=" "><a rel="tooltip" data-placement="right" data-original-title="Reports" href="inv_combosart"><i class="icon-bar-chart"></i> <span class="caption">inv_combosart</span></a></li>
+			<li class=" "><a rel="tooltip" data-placement="right" data-original-title="Reports" href="inv_detfactura"><i class="icon-bar-chart"></i> <span class="caption">inv_detfactura</span></a></li>
+			
             
             <li class=" "><a rel="tooltip" data-placement="right" data-original-title="UI Features" href="#"><i class="icon-archive"></i> <span class="caption">Paquetes</span></a></li>
             

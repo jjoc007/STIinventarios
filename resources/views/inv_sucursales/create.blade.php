@@ -31,9 +31,8 @@
 
 
     <div class="form-group">
-<button type="submit" class="btn btn-primary pull-right" style="margin:1em 0em;">Registrar</button>       
-	   
-    </div>
+		<button type="submit" class="btn btn-primary pull-right" style="margin:1em 0em;">Registrar</button>       
+	</div>
     {!! Form::close() !!}
 
     @if ($errors->any())

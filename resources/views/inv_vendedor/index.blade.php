@@ -1,13 +1,101 @@
-@extends('layouts.master')
-
-@section('content')
-
-    <h1>Inv_vendedor <a href="{{ url('inv_vendedor/create') }}" class="btn btn-primary pull-right btn-sm">Add New Inv_vendedor</a></h1>
+<div class="content">
+    <div class="row">
+        <div class="col-sm-8 main-content">
+		
+    <h2>Inv_vendedor</h2>
+	
+	{!! Form::open(['route' => 'inv_vendedor.index', 'method'=>'GET', 'class' => 'form-horizontal']) !!}
+                <div class="form-group {{ $errors->has('ven_codigo') ? 'has-error' : ''}}">
+                {!! Form::label('ven_codigo', 'Ven Codigo: ', ['class' => 'col-sm-3 control-label']) !!}
+                <div class="col-sm-6">
+                    {!! Form::text('ven_codigo', null, ['class' => 'form-control']) !!}
+                    {!! $errors->first('ven_codigo', '<p class="help-block">:message</p>') !!}
+                </div>
+            </div>
+            <div class="form-group {{ $errors->has('ven_nombre') ? 'has-error' : ''}}">
+                {!! Form::label('ven_nombre', 'Ven Nombre: ', ['class' => 'col-sm-3 control-label']) !!}
+                <div class="col-sm-6">
+                    {!! Form::text('ven_nombre', null, ['class' => 'form-control']) !!}
+                    {!! $errors->first('ven_nombre', '<p class="help-block">:message</p>') !!}
+                </div>
+            </div>
+            <div class="form-group {{ $errors->has('ven_zona') ? 'has-error' : ''}}">
+                {!! Form::label('ven_zona', 'Ven Zona: ', ['class' => 'col-sm-3 control-label']) !!}
+                <div class="col-sm-6">
+                    {!! Form::text('ven_zona', null, ['class' => 'form-control']) !!}
+                    {!! $errors->first('ven_zona', '<p class="help-block">:message</p>') !!}
+                </div>
+            </div>
+            
+     <button type="submit" class="btn btn-primary pull-right" style="margin:1em 0em;">Buscar</button>
+    {!! Form::close() !!}
+	
+	<a href="{{ route('inv_vendedor.create') }}">
+                    <button class="btn btn-primary pull-right" style="margin:1em 0em;">Registrar</button>
+                  </a>
+		
     <div class="table">
         <table class="table table-bordered table-striped table-hover">
             <thead>
                 <tr>
-                    <th>S.No</th><th>Ven Codigo</th><th>Ven Nombre</th><th>Ven Zona</th><th>Actions</th>
+                    <th>S.No</th>
+					<th>
+					
+					 @if ($sortby == 'ven_codigo' && $order == 'asc') {!! link_to_action(
+                               'inv_vendedorController@index',
+                               'Codigo',
+                               array(
+                                   'sortby' => 'ven_codigo',
+                                   'order' => 'desc'
+                               )
+                           ) !!}
+                       @else {!! link_to_action(
+                               'inv_vendedorController@index',
+                               'Codigo',
+                               array(
+                                   'sortby' => 'ven_codigo',
+                                   'order' => 'asc'
+                               )
+                           )!!}
+                       @endif
+					
+					
+					</th>
+					<th> @if ($sortby == 'ven_nombre' && $order == 'asc') {!! link_to_action(
+                               'inv_vendedorController@index',
+                               'Nombre ',
+                               array(
+                                   'sortby' => 'ven_nombre',
+                                   'order' => 'desc'
+                               )
+                           ) !!}
+                       @else {!! link_to_action(
+                               'inv_vendedorController@index',
+                               'Nombre',
+                               array(
+                                   'sortby' => 'ven_nombre',
+                                   'order' => 'asc'
+                               )
+                           )!!}
+                       @endif</th>
+					<th>@if ($sortby == 'ven_zona' && $order == 'asc') {!! link_to_action(
+                               'inv_vendedorController@index',
+                               'Zona',
+                               array(
+                                   'sortby' => 'ven_zona',
+                                   'order' => 'desc'
+                               )
+                           ) !!}
+                       @else {!! link_to_action(
+                               'inv_vendedorController@index',
+                               'Zona',
+                               array(
+                                   'sortby' => 'ven_zona',
+                                   'order' => 'asc'
+                               )
+                           )!!}
+                       @endif</th>
+					<th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -33,7 +121,8 @@
             @endforeach
             </tbody>
         </table>
-        <div class="pagination"> {!! $inv_vendedor->render() !!} </div>
+        <div align="center"> {!! $inv_vendedor->appends(['sortby' => $sortby, 'order' => $order ])->render() !!} </div>
     </div>
-
-@endsection
+      </div>
+    </div>
+</div>
